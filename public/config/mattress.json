@@ -1,0 +1,69 @@
+{
+  "$comment": "Edit this file to swap assets and copy. Drop new images into /public/assets/ and update the src path. Refresh the page to see changes.",
+  "intro": {
+    "title": "7 Layers of Reliable Comfort",
+    "desc": "Medium soft or medium firm mattresses are loved by many mattress shoppers."
+  },
+  "base": {
+    "src": "/assets/base.png",
+    "alt": "Mattress base"
+  },
+  "layers": [
+    {
+      "src": "/assets/layer-1.png",
+      "alt": "TENCEL Lyocell Cover layer",
+      "title": "TENCEL\u2122 Lyocell Cover",
+      "desc": "Medium soft or medium firm mattresses are loved by many mattress shoppers."
+    },
+    {
+      "src": "/assets/layer-2.png",
+      "alt": "Cooling Memory Gel layer",
+      "title": "Cooling Memory Gel",
+      "desc": "Medium soft or medium firm mattresses are loved by many mattress shoppers."
+    },
+    {
+      "src": "/assets/layer-3.png",
+      "alt": "Pocket Spring layer",
+      "title": "Pocket Spring",
+      "desc": "Medium soft or medium firm mattresses are loved by many mattress shoppers."
+    }
+  ],
+  "totalBadges": 7,
+  "defaults": {
+    "scroll": {
+      "distancePerStateVh": 130,
+      "snap": "mandatory",
+      "advanceThreshold": 0.5
+    },
+    "layer": {
+      "activeRaisePx": 34,
+      "driftPerStepPx": 24,
+      "fadeStartStep": 1,
+      "fadeEndStep": 2,
+      "beginOpacity": 1,
+      "finalOpacity": 0,
+      "layerScale": 1,
+      "transitionMs": 320,
+      "easing": "easeOutCubic"
+    },
+    "caption": {
+      "slideStepPx": 335,
+      "transitionMs": 360,
+      "easing": "easeOutCubic",
+      "crossFade": true
+    },
+    "visual": {
+      "canvasHeightPx": 264,
+      "stackOffsetPx": 0,
+      "backgroundColor": "#FBF9F4",
+      "accentColor": "#844025",
+      "headingColor": "#3C101E",
+      "bodyColor": "#7C5F68"
+    },
+    "debug": {
+      "showOverlay": false,
+      "showOutlines": false,
+      "forceState": null
+    }
+  }
+}

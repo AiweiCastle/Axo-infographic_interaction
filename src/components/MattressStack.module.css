@@ -1,0 +1,42 @@
+.canvas {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.canvas[data-debug-outline] {
+  outline: 1px dashed rgba(60, 16, 30, 0.4);
+}
+
+.canvas[data-debug-outline] .layer {
+  outline: 1px solid rgba(132, 64, 37, 0.6);
+}
+
+.layer {
+  position: absolute;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Base mattress wrapper crops a larger source image to match the Figma frame. */
+.baseWrap {
+  overflow: hidden;
+}
+
+.baseImg {
+  position: absolute;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  max-width: none;
+}
