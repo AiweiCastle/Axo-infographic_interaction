@@ -139,7 +139,13 @@ export default function Page() {
                   activeIndex={activeBadge}
                   accentColor={settings.visual.accentColor}
                   onSelect={(n) => {
-                    update("debug", { forceState: n });
+                    const container = containerRef.current;
+                    const section = sectionRef.current;
+                    if (!container || !section) return;
+                    const segments = Math.max(stateCount - 1, 1);
+                    const travel = Math.max(1, section.offsetHeight - container.clientHeight);
+                    const target = section.offsetTop + (n / segments) * travel;
+                    container.scrollTo({ top: target, behavior: "smooth" });
                   }}
                 />
               </div>
