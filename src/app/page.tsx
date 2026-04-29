@@ -19,6 +19,11 @@ export default function Page() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
+  // When a badge is tapped, the indicator jumps directly to that number
+  // even though the underlying scroll-driven state animates through
+  // intermediate values. Cleared once scroll catches up.
+  const [pendingBadge, setPendingBadge] = useState<number | null>(null);
+
   // Load mattress.json once on mount.
   useEffect(() => {
     let alive = true;
@@ -54,10 +59,18 @@ export default function Page() {
   });
 
   const currentState = settings.debug.forceState ?? scroll.state;
-  const activeBadge = useMemo(() => {
+  const scrollBadge = useMemo(() => {
     if (!config) return 0;
     return currentState === 0 ? 0 : Math.min(layerCount, currentState);
   }, [config, currentState, layerCount]);
+  const activeBadge = pendingBadge ?? scrollBadge;
+
+  // Clear the pending override once scroll-driven state matches the target.
+  useEffect(() => {
+    if (pendingBadge !== null && scrollBadge === pendingBadge) {
+      setPendingBadge(null);
+    }
+  }, [pendingBadge, scrollBadge]);
 
   // Apply visual.background to scroll container via CSS variable
   const shellStyle = useMemo<React.CSSProperties>(
@@ -142,6 +155,10 @@ export default function Page() {
                     const container = containerRef.current;
                     const section = sectionRef.current;
                     if (!container || !section) return;
+                    if (settings.debug.forceState !== null) {
+                      update("debug", { forceState: null });
+                    }
+                    setPendingBadge(n);
                     const segments = Math.max(stateCount - 1, 1);
                     const travel = Math.max(1, section.offsetHeight - container.clientHeight);
                     const target = section.offsetTop + (n / segments) * travel;
