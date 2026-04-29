@@ -47,9 +47,32 @@ export interface CaptionSettings {
   crossFade: boolean;
 }
 
+export type ShadowBlendMode =
+  | "normal"
+  | "multiply"
+  | "overlay"
+  | "color-burn"
+  | "soft-light"
+  | "hard-light"
+  | "darken";
+
+export interface ShadowSettings {
+  enabled: boolean;
+  /** Vertical offset of the shadow in px. */
+  distancePx: number;
+  /** Blur radius of the shadow in px. */
+  radiusPx: number;
+  /** 0..1 — shadow opacity. UI displays this as 0..100%. */
+  opacity: number;
+  /** CSS mix-blend-mode applied to the shadow element. */
+  blendMode: ShadowBlendMode;
+}
+
 export interface VisualSettings {
   canvasHeightPx: number;
   stackOffsetPx: number;
+  /** Font size (px) of the number inside each badge dot, all states. */
+  badgeFontSizePx: number;
   backgroundColor: string;
   accentColor: string;
   headingColor: string;
@@ -67,6 +90,7 @@ export interface PrototypeSettings {
   scroll: ScrollSettings;
   layer: LayerSettings;
   caption: CaptionSettings;
+  shadow: ShadowSettings;
   visual: VisualSettings;
   debug: DebugSettings;
 }

@@ -200,6 +200,49 @@ export function SettingsDrawer({ settings, update, reset, stateCount }: Props) {
             />
           </Group>
 
+          <Group label="Shadow">
+            <Toggle
+              label="Enabled"
+              value={settings.shadow.enabled}
+              onChange={(v) => update("shadow", { enabled: v })}
+            />
+            <Number
+              label="Distance (px)"
+              min={0}
+              max={60}
+              step={1}
+              value={settings.shadow.distancePx}
+              onChange={(v) => update("shadow", { distancePx: v })}
+            />
+            <Number
+              label="Radius (px)"
+              min={0}
+              max={80}
+              step={1}
+              value={settings.shadow.radiusPx}
+              onChange={(v) => update("shadow", { radiusPx: v })}
+            />
+            <PercentRange
+              label="Opacity"
+              value={settings.shadow.opacity}
+              onChange={(v) => update("shadow", { opacity: v })}
+            />
+            <Select
+              label="Blend mode"
+              value={settings.shadow.blendMode}
+              options={[
+                "normal",
+                "multiply",
+                "overlay",
+                "color-burn",
+                "soft-light",
+                "hard-light",
+                "darken",
+              ]}
+              onChange={(v) => update("shadow", { blendMode: v })}
+            />
+          </Group>
+
           <Group label="Visual">
             <Number
               label="Canvas height (px)"
@@ -216,6 +259,14 @@ export function SettingsDrawer({ settings, update, reset, stateCount }: Props) {
               step={2}
               value={settings.visual.stackOffsetPx}
               onChange={(v) => update("visual", { stackOffsetPx: v })}
+            />
+            <Number
+              label="Badge number size (px)"
+              min={6}
+              max={32}
+              step={1}
+              value={settings.visual.badgeFontSizePx}
+              onChange={(v) => update("visual", { badgeFontSizePx: v })}
             />
             <ColorInput
               label="Background"

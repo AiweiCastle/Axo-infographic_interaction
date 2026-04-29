@@ -35,6 +35,7 @@ export function useSettings(jsonDefaults: PrototypeSettings | null) {
       scroll: { ...baseline.scroll, ...(overrides.scroll ?? {}) },
       layer: { ...baseline.layer, ...(overrides.layer ?? {}) },
       caption: { ...baseline.caption, ...(overrides.caption ?? {}) },
+      shadow: { ...baseline.shadow, ...(overrides.shadow ?? {}) },
       visual: { ...baseline.visual, ...(overrides.visual ?? {}) },
       debug: { ...baseline.debug, ...(overrides.debug ?? {}) },
     };

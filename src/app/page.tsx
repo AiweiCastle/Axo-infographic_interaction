@@ -151,6 +151,7 @@ export default function Page() {
                   totalBadges={config.totalBadges}
                   activeIndex={activeBadge}
                   accentColor={settings.visual.accentColor}
+                  fontSizePx={settings.visual.badgeFontSizePx}
                   onSelect={(n) => {
                     const container = containerRef.current;
                     const section = sectionRef.current;

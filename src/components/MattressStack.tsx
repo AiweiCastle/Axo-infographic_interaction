@@ -129,6 +129,9 @@ export function MattressStack({ config, settings, state }: Props) {
       {config.layers.map((layer, i) => {
         const geom = LAYER_GEOM[i] ?? LAYER_GEOM[LAYER_GEOM.length - 1];
         const ls = layerStyles[i];
+        // Shadow only on layers still resting in the stack (not yet activated).
+        const isResting = state - (i + 1) < 0;
+        const sh = settings.shadow;
         // Apply layerScale around each layer's center so growing/shrinking
         // doesn't shift the layer off its anchor.
         const ls_scale = settings.layer.layerScale;
@@ -136,28 +139,54 @@ export function MattressStack({ config, settings, state }: Props) {
         const scaledH = geom.height * scale * ls_scale;
         const centerX = (geom.left + geom.width / 2) * scale;
         const centerY = (geom.top + geom.height / 2) * scale;
+        const layerLeft = centerX - scaledW / 2;
+        const layerTop = centerY - scaledH / 2;
+        const shadowVisible = sh.enabled && isResting;
         return (
-          <div
-            key={i}
-            className={styles.layer}
-            style={{
-              left: centerX - scaledW / 2,
-              top: centerY - scaledH / 2,
-              width: scaledW,
-              height: scaledH,
-              transform: `translateY(${ls.translateY * scale}px)`,
-              opacity: ls.opacity,
-              transition: `transform ${transitionMs}ms ${cssEasing}, opacity ${transitionMs}ms ${cssEasing}`,
-              zIndex: 10 + (layerCount - i),
-            }}
-            data-role={`layer-${i + 1}`}
-          >
+          <div key={i} style={{ display: "contents" }}>
+            {/* Shadow: black silhouette clone of the layer img, blurred and
+                offset, blended with color-burn against what's behind it. */}
             <img
               src={layer.src}
-              alt={layer.alt}
+              aria-hidden
               draggable={false}
               className={styles.img}
+              style={{
+                position: "absolute",
+                left: layerLeft,
+                top: layerTop,
+                width: scaledW,
+                height: scaledH,
+                transform: `translateY(${ls.translateY * scale + sh.distancePx}px)`,
+                filter: `brightness(0) blur(${sh.radiusPx / 2}px)`,
+                opacity: shadowVisible ? sh.opacity * ls.opacity : 0,
+                mixBlendMode: sh.blendMode,
+                transition: `transform ${transitionMs}ms ${cssEasing}, opacity ${transitionMs}ms ${cssEasing}`,
+                zIndex: 10 + 2 * (layerCount - i) - 1,
+                pointerEvents: "none",
+              }}
             />
+            <div
+              className={styles.layer}
+              style={{
+                left: layerLeft,
+                top: layerTop,
+                width: scaledW,
+                height: scaledH,
+                transform: `translateY(${ls.translateY * scale}px)`,
+                opacity: ls.opacity,
+                transition: `transform ${transitionMs}ms ${cssEasing}, opacity ${transitionMs}ms ${cssEasing}`,
+                zIndex: 10 + 2 * (layerCount - i),
+              }}
+              data-role={`layer-${i + 1}`}
+            >
+              <img
+                src={layer.src}
+                alt={layer.alt}
+                draggable={false}
+                className={styles.img}
+              />
+            </div>
           </div>
         );
       })}
