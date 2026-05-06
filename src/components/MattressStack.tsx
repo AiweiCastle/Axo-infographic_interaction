@@ -13,13 +13,13 @@ interface Props {
 }
 
 /**
- * Layer geometry mirrors the Figma frame 6:421 default state:
+ * Layer geometry mirrors the Figma frame 6:421 default state (Number=0):
  *   - Animate Layer canvas: 342×264.4
- *   - Base image:   left 23.35, top 84.96, w 306.4, h 166.67
- *                   (inner img: h 159.34%, w 101.33%, left -1.03%, top -50.72%)
- *   - Layer 3:      left 29.46, top 69.87, w 290.4, h 65.4
- *   - Layer 2:      left 29.46, top 57.48, w 290.4, h 56.6
- *   - Layer 1:      left 29.46, top 33.77, w 293.5, h 56.6
+ *   - Base image:   left 22,    top 118,   w 304.5, h 135.5
+ *   - Layer 4:      left 29,    top 86,    w 293.5, h 94    (Pocket spring)
+ *   - Layer 3:      left 29.46, top 69.87, w 290.4, h 65.4  (Support memory foam)
+ *   - Layer 2:      left 29.46, top 57.48, w 290.4, h 56.6  (Cooling memory gel)
+ *   - Layer 1:      left 29.46, top 33.77, w 293.5, h 56.6  (TENCEL cover)
  *
  * Each layer's index in `config.layers` maps top-to-bottom: index 0 = topmost
  * (layer 1).
@@ -34,10 +34,9 @@ const LAYER_GEOM = [
   { left: 29.46, top: 33.77, width: 293.5, height: 56.6 }, // layer 1 (top)
   { left: 29.46, top: 57.48, width: 290.4, height: 56.6 }, // layer 2
   { left: 29.46, top: 69.87, width: 290.4, height: 65.4 }, // layer 3
+  { left: 29.0, top: 86.0, width: 293.5, height: 94.0 }, // layer 4 (NEW)
 ];
-const BASE_GEOM = { left: 23.35, top: 84.96, width: 306.4, height: 166.67 };
-// Inner image position inside the base wrapper — replicates Figma's crop.
-const BASE_IMG = { width: 101.33, height: 159.34, left: -1.03, top: -50.72 };
+const BASE_GEOM = { left: 22.0, top: 118.0, width: 304.5, height: 135.5 };
 
 export function MattressStack({ config, settings, state }: Props) {
   const layerCount = config.layers.length;
@@ -98,11 +97,10 @@ export function MattressStack({ config, settings, state }: Props) {
       style={containerStyle}
       data-debug-outline={settings.debug.showOutlines || undefined}
     >
-      {/* Base mattress (always at rest). Figma crops a larger image inside the
-          fixed-size box, so we wrap the img in an overflow:hidden container and
-          position the img with the percentages from the design. */}
+      {/* Base mattress (always at rest). Single self-contained asset from
+          Figma — fills the geometry box directly. */}
       <div
-        className={`${styles.layer} ${styles.baseWrap}`}
+        className={styles.layer}
         style={{
           left: BASE_GEOM.left * scale,
           top: BASE_GEOM.top * scale,
@@ -115,13 +113,7 @@ export function MattressStack({ config, settings, state }: Props) {
           src={config.base.src}
           alt={config.base.alt}
           draggable={false}
-          className={styles.baseImg}
-          style={{
-            width: `${BASE_IMG.width}%`,
-            height: `${BASE_IMG.height}%`,
-            left: `${BASE_IMG.left}%`,
-            top: `${BASE_IMG.top}%`,
-          }}
+          className={styles.img}
         />
       </div>
 

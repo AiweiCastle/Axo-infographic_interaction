@@ -1,31 +1,37 @@
 {
   "$comment": "Edit this file to swap assets and copy. Drop new images into /public/assets/ and update the src path. Refresh the page to see changes.",
   "intro": {
-    "title": "7 Layers of Reliable Comfort",
-    "desc": "Medium soft or medium firm mattresses are loved by many mattress shoppers."
+    "title": "7 layers, built for better sleep",
+    "desc": "From breathable comfort to pressure relief and motion isolation, each layer works harder."
   },
   "base": {
     "src": "/assets/base.png",
-    "alt": "Mattress base"
+    "alt": "Mattress foundation"
   },
   "layers": [
     {
       "src": "/assets/layer-1.png",
-      "alt": "TENCEL Lyocell Cover layer",
-      "title": "TENCEL\u2122 Lyocell Cover",
-      "desc": "Medium soft or medium firm mattresses are loved by many mattress shoppers."
+      "alt": "TENCEL Lyocell cover",
+      "title": "TENCEL\u2122 Lyocell cover",
+      "desc": "Cool against the skin, breathable by nature, and softly smooth to the touch, this cover helps manage heat and moisture through the night."
     },
     {
       "src": "/assets/layer-2.png",
-      "alt": "Cooling Memory Gel layer",
-      "title": "Cooling Memory Gel",
-      "desc": "Medium soft or medium firm mattresses are loved by many mattress shoppers."
+      "alt": "Cooling memory gel",
+      "title": "Cooling memory gel",
+      "desc": "Contours to your body to ease pressure across the shoulders, back, and hips, while gel infusion helps dissipate excess heat."
     },
     {
       "src": "/assets/layer-3.png",
-      "alt": "Pocket Spring layer",
-      "title": "Pocket Spring",
-      "desc": "Medium soft or medium firm mattresses are loved by many mattress shoppers."
+      "alt": "Support memory foam",
+      "title": "Support memory foam",
+      "desc": "A responsive foam layer that adds cushioning without losing structure, helping the mattress feel balanced, supportive, and shape-retaining."
+    },
+    {
+      "src": "/assets/layer-4.png",
+      "alt": "Pocket spring",
+      "title": "Pocket spring",
+      "desc": "Individually wrapped springs help minimise motion transfer, improve airflow, and provide targeted support where your body needs it most."
     }
   ],
   "totalBadges": 7,
